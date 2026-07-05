@@ -7,31 +7,35 @@ const client = new Client({
   ]
 });
 
-const WELCOME_CHANNEL_ID = 'PUT_CHANNEL_ID_HERE';
+const WELCOME_CHANNEL_ID = '1523399598817673349';
 
 client.once('ready', () => {
-  console.log(`Bot is online as ${client.user.tag}`);
+  console.log(`${client.user.tag} is online!`);
 });
 
-client.on('guildMemberAdd', async member => {
+client.on('guildMemberAdd', async (member) => {
   const channel = member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
+
   if (!channel) return;
 
-  const avatar = member.user.displayAvatarURL({
-    extension: 'png',
-    size: 1024
-  });
-
   const embed = new EmbedBuilder()
-    .setColor('#2ecc71')
-    .setTitle('أهلاً وسهلاً')
-    .setDescription(`نورت السيرفر يا ${member}`)
-    .setThumbnail(avatar)
-    .setImage(avatar)
-    .setFooter({ text: `أنت العضو رقم ${member.guild.memberCount}` });
+    .setColor('#00b0f4')
+    .setTitle('🎉 مرحباً بك')
+    .setDescription(
+`أهلاً وسهلاً ${member}
+
+نورت السيرفر ❤️
+
+نتمنى لك وقتاً ممتعاً معنا.
+
+أنت العضو رقم: ${member.guild.memberCount}`
+    )
+    .setThumbnail(member.user.displayAvatarURL({ size: 1024 }))
+    .setImage(member.user.displayAvatarURL({ size: 1024 }))
+    .setTimestamp();
 
   await channel.send({
-    content: `هلا والله ${member}`,
+    content: `${member}`,
     embeds: [embed]
   });
 });
