@@ -18,20 +18,27 @@ client.on('guildMemberAdd', async (member) => {
 
   if (!channel) return;
 
+  const avatar = member.user.displayAvatarURL({
+    extension: 'png',
+    size: 1024
+  });
+
   const embed = new EmbedBuilder()
-    .setColor('#00b0f4')
-    .setTitle('🎉 مرحباً بك')
+    .setColor('#C8A24A')
+    .setTitle('🎉 أهلاً وسهلاً')
     .setDescription(
-`أهلاً وسهلاً ${member}
+`**مرحباً بك ${member}**
 
-نورت السيرفر ❤️
+نورت سيرفر **العراق العظيم** 🇮🇶
 
-نتمنى لك وقتاً ممتعاً معنا.
-
-أنت العضو رقم: ${member.guild.memberCount}`
+نتمنى لك وقتاً ممتعاً بين أعضاء السيرفر.`
     )
-    .setThumbnail(member.user.displayAvatarURL({ size: 1024 }))
-    .setImage(member.user.displayAvatarURL({ size: 1024 }))
+    .setThumbnail(avatar)
+    .setImage(avatar)
+    .setFooter({
+      text: 'العراق العظيم',
+      iconURL: client.user.displayAvatarURL()
+    })
     .setTimestamp();
 
   await channel.send({
